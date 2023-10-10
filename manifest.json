@@ -1,0 +1,19 @@
+{
+  "action": {
+    "default_popup": "html/popup.html"
+  },
+  "background": {
+    "service_worker": "script/background.js"
+  },
+  "description": "Test Extension By Mr. Sam",
+  "devtools_page": "html/devtools.html",
+  "icons": {
+    "48": "images/icon.png"
+  },
+  "manifest_version": 3,
+  "name": "Key Event Live",
+  "permissions": [
+    "tabs"
+  ],
+  "version": "1.0"
+}
