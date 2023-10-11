@@ -1,4 +1,4 @@
-const state = {
+let state = {
   connected: false,
 }
 
@@ -8,22 +8,26 @@ const section = document.getElementsByTagName("section")[0]
 const title = document.getElementById("title")
 
 
-const changeAllClass = () => {
+function changeAllClass() {
+  // removemos/agregamos la clase al boton
+  btn.classList.toggle("on")
+
+
   title.classList.toggle("hide")
   connectedTitle.classList.toggle("hide")
+
   section.classList.toggle("on")
 }
 
-
-btn.addEventListener("click", async (event) => {
+async function toggleService() {
   try {
-    // obtenemos la ventana actual
-    const [currentTab] = await chrome.tabs.query({ active: true, currentWindow: true })
+    // verificamos si no esta conectado
+    if (!state.connected) {
+      const [currentTab] = await chrome.tabs.query({ active: true, currentWindow: true })
 
-
-    console.log(currentTab)
-    // enviamos un mensaje de estado
-    // await chrome.tabs.sendMessage(currentTab.id, JSON.stringify(state))
+      // enviamos un mensaje de estado
+      // await chrome.tabs.sendMessage(currentTab.id, JSON.stringify(state))
+    }
 
     // cambiamos de estado
     state.connected = !state.connected
@@ -34,12 +38,14 @@ btn.addEventListener("click", async (event) => {
     // cambiamos las clases a los elementos
     changeAllClass()
 
-    // removemos/agregamos la clase al boton
-    btn.classList.toggle("on")
   } catch (error) {
     window.alert(error)
   }
-})
+}
+
+
+// agregamos eventos al boton de encendido
+btn.addEventListener("click", toggleService)
 
 
 document.addEventListener("DOMContentLoaded", async function () {
@@ -49,14 +55,12 @@ document.addEventListener("DOMContentLoaded", async function () {
   // verificamos si existe 
   if (stateFromStorage) {
     stateFromStorage = JSON.parse(stateFromStorage)
-  }
 
-  console.log(stateFromStorage)
+    state = { ...stateFromStorage }
+  }
 
   // verificamos si esta conectado
   if (stateFromStorage?.connected) {
-    btn.classList.add("on")
-
     changeAllClass()
   }
 })
