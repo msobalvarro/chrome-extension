@@ -21,16 +21,10 @@ function changeAllClass() {
 
 async function toggleService() {
   try {
-    // verificamos si no esta conectado
-    if (!state.connected) {
-      const [currentTab] = await chrome.tabs.query({ active: true, currentWindow: true })
-
-      // enviamos un mensaje de estado
-      // await chrome.tabs.sendMessage(currentTab.id, JSON.stringify(state))
-    }
-
     // cambiamos de estado
     state.connected = !state.connected
+    // enviamos un mensaje de estado
+    await chrome.runtime.sendMessage(state)
 
     // actualizamos el estado
     await localStorage.setItem("state", JSON.stringify(state))
@@ -43,10 +37,8 @@ async function toggleService() {
   }
 }
 
-
 // agregamos eventos al boton de encendido
 btn.addEventListener("click", toggleService)
-
 
 document.addEventListener("DOMContentLoaded", async function () {
   // obtenemos el estado
@@ -62,5 +54,12 @@ document.addEventListener("DOMContentLoaded", async function () {
   // verificamos si esta conectado
   if (stateFromStorage?.connected) {
     changeAllClass()
+  }
+})
+
+
+document.addEventListener("keypress", function (e) {
+  if (state.connected) {
+    chrome.runtime.sendMessage({ key: e.key, site: null })
   }
 })
