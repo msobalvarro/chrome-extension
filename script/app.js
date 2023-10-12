@@ -23,8 +23,14 @@ async function toggleService() {
   try {
     // cambiamos de estado
     state.connected = !state.connected
+
+    // obtenemos el tab
+    // const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
+
     // enviamos un mensaje de estado
-    await chrome.runtime.sendMessage(state)
+    // await chrome.runtime.sendMessage(state, function (response) {
+    //   console.log(response)
+    // })
 
     // actualizamos el estado
     await localStorage.setItem("state", JSON.stringify(state))

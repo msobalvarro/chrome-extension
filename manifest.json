@@ -3,8 +3,10 @@
     "default_popup": "html/popup.html"
   },
   "background": {
-    "service_worker": "script/background.js"
+    "service_worker": "script/background.js",
+    "type": "module"
   },
+  "minimum_chrome_version": "93",
   "description": "Test Extension By Mr. Sam",
   "devtools_page": "html/devtools.html",
   "icons": {

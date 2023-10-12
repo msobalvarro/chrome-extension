@@ -1,0 +1,27 @@
+{
+  "name": "key-event-live-extension",
+  "version": "1.0.0",
+  "description": "Una extensión para monitoriar eventos de teclado, cambio de pantalla, informacion del sitio web en tiempo real.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/msobalvarro/chrome-extension.git"
+  },
+  "keywords": [
+    "extension",
+    "chrome",
+    "socket"
+  ],
+  "author": "msobalvarro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/msobalvarro/chrome-extension/issues"
+  },
+  "homepage": "https://github.com/msobalvarro/chrome-extension#readme",
+  "dependencies": {
+    "socket.io-client": "^4.7.2"
+  }
+}
