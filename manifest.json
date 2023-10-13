@@ -3,7 +3,7 @@
     "default_popup": "html/popup.html"
   },
   "background": {
-    "service_worker": "script/background.js",
+    "service_worker": "script/bundle.js",
     "type": "module"
   },
   "minimum_chrome_version": "93",
